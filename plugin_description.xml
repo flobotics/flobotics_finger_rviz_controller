@@ -1,0 +1,17 @@
+<library path="lib/libflobotics_finger_rviz_controller"> 
+    <class name="flobotics_finger_rviz_controller/flobotics_finger_control_panel"
+           type="flobotics_finger_rviz_controller::FloboticsFingerControlPanel"
+           base_class_type="rviz::Panel">
+        <description>
+            An empty panel.
+        </description>
+    </class>
+    
+   	<class name="flobotics_finger_rviz_controller/flobotics_finger_rviz_servo_controller"
+           type="flobotics_finger_rviz_servo_controller::FloboticsFingerRvizServoController"
+           base_class_type="rviz::Panel">
+        <description>
+            An empty panel.
+        </description>
+    </class>
+</library>
