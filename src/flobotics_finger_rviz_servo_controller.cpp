@@ -4,6 +4,9 @@
 
 #include <flobotics_finger_messages/flobotics_finger_servo_control_values.h>
 
+#include "std_msgs/Int16MultiArray.h"
+
+
 namespace flobotics_finger_rviz_servo_controller {
 
 FloboticsFingerRvizServoController::FloboticsFingerRvizServoController(QWidget* parent):
@@ -119,14 +122,23 @@ FloboticsFingerRvizServoController::FloboticsFingerRvizServoController(QWidget* 
     connect(_button14, SIGNAL(released()), this, SLOT(stop()));
     connect(_button15, SIGNAL(released()), this, SLOT(stop()));
 
-    wind_publisher_ = nh_.advertise<flobotics_finger_messages::flobotics_finger_servo_control_values>("pololu_usc01a", 10 );
+    //wind_publisher_ = nh_.advertise<flobotics_finger_messages::flobotics_finger_servo_control_values>("pololu_usc01a", 10 );
+    wind_publisher_ = nh_.advertise<std_msgs::Int16MultiArray>("servo_pwm_pi_sub", 10);
 }
 
 void FloboticsFingerRvizServoController::wind(int servoNr){
   //pub value to topic
-  flobotics_finger_messages::flobotics_finger_servo_control_values msg;
+  //  flobotics_finger_messages::flobotics_finger_servo_control_values msg;
+  std_msgs::Int16MultiArray msg;
+  
+  //clear array
+  msg.data.clear();
+
+  //msg.data.push_back(450);
 
 
+
+/*
   msg.servo0 = 64;
   msg.servo1 = 64;
   msg.servo2 = 64;
@@ -135,47 +147,63 @@ void FloboticsFingerRvizServoController::wind(int servoNr){
   msg.servo5 = 64;
   msg.servo6 = 64;
   msg.servo7 = 64;
-
+*/
 
   if(servoNr==0)
-    msg.servo0 = 50;
-  if(servoNr==1)
-    msg.servo0 = 75;
+    msg.data.push_back(350);
+  else if (servoNr==1)
+    msg.data.push_back(450);
+  else
+   msg.data.push_back(4099);  //dont do anything
 
   if(servoNr==2)
-    msg.servo1 = 50;
-  if(servoNr==3)
-    msg.servo1 = 75;
+    msg.data.push_back(350);
+  else if(servoNr==3)
+    msg.data.push_back(450);
+  else
+    msg.data.push_back(4099); 
 
   if(servoNr==4)
-    msg.servo2 = 50;
-  if(servoNr==5)
-    msg.servo2 = 75;
+    msg.data.push_back(350);
+  else if(servoNr==5)
+    msg.data.push_back(450);
+  else
+    msg.data.push_back(4099);
 
   if(servoNr==6)
-    msg.servo3 = 50;
-  if(servoNr==7)
-    msg.servo3 = 75;
+    msg.data.push_back(350);
+  else if(servoNr==7)
+    msg.data.push_back(450);
+  else
+    msg.data.push_back(4099);
 
   if(servoNr==8)
-    msg.servo4 = 50;
-  if(servoNr==9)
-    msg.servo4 = 75;
+    msg.data.push_back(350);
+  else if(servoNr==9)
+    msg.data.push_back(450);
+  else
+    msg.data.push_back(4099);
 
   if(servoNr==10)
-    msg.servo5 = 50;
-  if(servoNr==11)
-    msg.servo5 = 75;
+    msg.data.push_back(350);
+  else if(servoNr==11)
+    msg.data.push_back(450);
+  else
+    msg.data.push_back(4099);
 
   if(servoNr==12)
-    msg.servo6 = 50;
-  if(servoNr==13)
-    msg.servo6 = 75;
+    msg.data.push_back(350);
+  else if(servoNr==13)
+    msg.data.push_back(450);
+  else
+    msg.data.push_back(4099);
 
   if(servoNr==14)
-    msg.servo7 = 50;
-  if(servoNr==15)
-    msg.servo7 = 75;
+    msg.data.push_back(350);
+  else if(servoNr==15)
+    msg.data.push_back(450);
+  else
+    msg.data.push_back(4099);
 
 
   wind_publisher_.publish(msg);
@@ -183,6 +211,22 @@ void FloboticsFingerRvizServoController::wind(int servoNr){
 
 void FloboticsFingerRvizServoController::stop(){
   //pub value to topic
+  
+  std_msgs::Int16MultiArray msg;
+
+  //clear array
+  msg.data.clear();
+
+  msg.data.push_back(400);
+  msg.data.push_back(400);
+  msg.data.push_back(400);
+  msg.data.push_back(400);
+  msg.data.push_back(400);
+  msg.data.push_back(400);
+  msg.data.push_back(400);
+  msg.data.push_back(400);
+
+/*
   flobotics_finger_messages::flobotics_finger_servo_control_values msg;
   msg.servo0 = 64;
   msg.servo1 = 64;
@@ -200,7 +244,7 @@ void FloboticsFingerRvizServoController::stop(){
   msg.servo13 = 64;
   msg.servo14 = 64;
   msg.servo15 = 64;
-
+*/
   wind_publisher_.publish(msg);
 }
 
