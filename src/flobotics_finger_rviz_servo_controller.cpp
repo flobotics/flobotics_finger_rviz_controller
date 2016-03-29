@@ -6,6 +6,9 @@
 
 #include "std_msgs/Int16MultiArray.h"
 
+int val_windup = 410;//450;
+int val_wind   = 390;//350;
+int val_windstop = 400;
 
 namespace flobotics_finger_rviz_servo_controller {
 
@@ -150,58 +153,58 @@ void FloboticsFingerRvizServoController::wind(int servoNr){
 */
 
   if(servoNr==0)
-    msg.data.push_back(350);
+    msg.data.push_back(val_wind);
   else if (servoNr==1)
-    msg.data.push_back(450);
+    msg.data.push_back(val_windup);
   else
    msg.data.push_back(4099);  //dont do anything
 
   if(servoNr==2)
-    msg.data.push_back(350);
+    msg.data.push_back(val_wind);
   else if(servoNr==3)
-    msg.data.push_back(450);
+    msg.data.push_back(val_windup);
   else
     msg.data.push_back(4099); 
 
   if(servoNr==4)
-    msg.data.push_back(350);
+    msg.data.push_back(val_wind);
   else if(servoNr==5)
-    msg.data.push_back(450);
+    msg.data.push_back(val_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==6)
-    msg.data.push_back(350);
+    msg.data.push_back(val_wind);
   else if(servoNr==7)
-    msg.data.push_back(450);
+    msg.data.push_back(val_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==8)
-    msg.data.push_back(350);
+    msg.data.push_back(val_wind);
   else if(servoNr==9)
-    msg.data.push_back(450);
+    msg.data.push_back(val_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==10)
-    msg.data.push_back(350);
+    msg.data.push_back(val_wind);
   else if(servoNr==11)
-    msg.data.push_back(450);
+    msg.data.push_back(val_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==12)
-    msg.data.push_back(350);
+    msg.data.push_back(val_wind);
   else if(servoNr==13)
-    msg.data.push_back(450);
+    msg.data.push_back(val_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==14)
-    msg.data.push_back(350);
+    msg.data.push_back(val_wind);
   else if(servoNr==15)
-    msg.data.push_back(450);
+    msg.data.push_back(val_windup);
   else
     msg.data.push_back(4099);
 
@@ -217,14 +220,14 @@ void FloboticsFingerRvizServoController::stop(){
   //clear array
   msg.data.clear();
 
-  msg.data.push_back(400);
-  msg.data.push_back(400);
-  msg.data.push_back(400);
-  msg.data.push_back(400);
-  msg.data.push_back(400);
-  msg.data.push_back(400);
-  msg.data.push_back(400);
-  msg.data.push_back(400);
+  msg.data.push_back(val_windstop);
+  msg.data.push_back(val_windstop);
+  msg.data.push_back(val_windstop);
+  msg.data.push_back(val_windstop);
+  msg.data.push_back(val_windstop);
+  msg.data.push_back(val_windstop);
+  msg.data.push_back(val_windstop);
+  msg.data.push_back(val_windstop);
 
 /*
   flobotics_finger_messages::flobotics_finger_servo_control_values msg;
