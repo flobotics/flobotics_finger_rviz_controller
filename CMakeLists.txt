@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rviz
  # dynamic_reconfigure
+  flobotics_finger_messages
 )
 
 #generate_dynamic_reconfigure_options(
@@ -102,6 +103,7 @@ include(${QT_USE_FILE})
 include_directories(
   include/flobotics_finger_rviz_controller/
   include/flobotics_finger_rviz_servo_controller/
+  ${catkin_INCLUDE_DIRS}
 )
 
 qt4_wrap_cpp(MOC_FILES
