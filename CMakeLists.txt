@@ -7,7 +7,12 @@ project(flobotics_finger_rviz_controller)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rviz
+ # dynamic_reconfigure
 )
+
+#generate_dynamic_reconfigure_options(
+#  cfg/flobotics_finger_rviz_servo_controller.cfg
+#)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -118,6 +123,7 @@ qt4_wrap_cpp(MOC_FILES
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(flobotics_finger_rviz_force_limits_node flobotics_finger_rviz_force_limits_generate_messages_cpp)
+#add_dependencies(flobotics_finger_rviz_controller ${PROJECT_NAME}_gencfg)
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(flobotics_finger_rviz_controller

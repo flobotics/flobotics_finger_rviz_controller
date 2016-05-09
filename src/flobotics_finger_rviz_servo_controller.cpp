@@ -1,17 +1,54 @@
 #include <pluginlib/class_list_macros.h>
-
 #include "flobotics_finger_rviz_servo_controller.h"
-
 #include <flobotics_finger_messages/flobotics_finger_servo_control_values.h>
-
 #include "std_msgs/Int16MultiArray.h"
 
+//#include <dynamic_reconfigure/server.h>
+//#include <flobotics_finger_rviz_controller/flobotics_finger_rviz_servo_controller.h>
+
+
 int val_windup = 410;//450;
-int val_wind   = 390;//350;
-int val_windstop = 400;
+int val_wind   = 380;//350;
+int val_windstop = 390;
+
+//values for hacked servos, as resistors are not perfectly equal
+int val_1_windup = 399;
+int val_1_wind = 359;
+int val_1_windstop = 378;
+
+int val_2_windup = 406;
+int val_2_wind = 366;
+int val_2_windstop = 385;
+
+int val_3_windup = 409;
+int val_3_wind = 369;
+int val_3_windstop = 389;
+
+int val_4_windup = 407;
+int val_4_wind = 367;
+int val_4_windstop = 387;
+
+int val_5_windup = 426;
+int val_5_wind = 380;
+int val_5_windstop = 406;
+
+int val_6_windup = 428;
+int val_6_wind = 380;
+int val_6_windstop = 408;
+
+int val_7_windup = 410;
+int val_7_wind = 380;
+int val_7_windstop = 389;
+
+int val_8_windup = 410;
+int val_8_wind = 370;
+int val_8_windstop = 393;
 
 namespace flobotics_finger_rviz_servo_controller {
-
+/*
+void callback(flobotics_finger_rviz_controller::flobotics_finger_rviz_servo_controller &config, uint32_t level) {
+  ROS_INFO("Reconfigure requestooo: %d, config.int_param);
+*/
 FloboticsFingerRvizServoController::FloboticsFingerRvizServoController(QWidget* parent):
     rviz::Panel(parent)
 {
@@ -127,6 +164,15 @@ FloboticsFingerRvizServoController::FloboticsFingerRvizServoController(QWidget* 
 
     //wind_publisher_ = nh_.advertise<flobotics_finger_messages::flobotics_finger_servo_control_values>("pololu_usc01a", 10 );
     wind_publisher_ = nh_.advertise<std_msgs::Int16MultiArray>("servo_pwm_pi_sub", 10);
+
+/*
+	dynamic_reconfigure::Server<flobotics_finger_rviz_controller::flobotics_finger_rviz_servo_controller> server;
+	dynamic_reconfigure::Server<flobotics_finger_rviz_controller::flobotics_finger_rviz_servo_controller>::CallbackType f;
+
+	f = boost::bind(&callback, _1, _2);
+	server.setCallback(f);
+*/
+
 }
 
 void FloboticsFingerRvizServoController::wind(int servoNr){
@@ -153,58 +199,58 @@ void FloboticsFingerRvizServoController::wind(int servoNr){
 */
 
   if(servoNr==0)
-    msg.data.push_back(val_wind);
+    msg.data.push_back(val_1_wind);
   else if (servoNr==1)
-    msg.data.push_back(val_windup);
+    msg.data.push_back(val_1_windup);
   else
    msg.data.push_back(4099);  //dont do anything
 
   if(servoNr==2)
-    msg.data.push_back(val_wind);
+    msg.data.push_back(val_2_wind);
   else if(servoNr==3)
-    msg.data.push_back(val_windup);
+    msg.data.push_back(val_2_windup);
   else
     msg.data.push_back(4099); 
 
   if(servoNr==4)
-    msg.data.push_back(val_wind);
+    msg.data.push_back(val_3_wind);
   else if(servoNr==5)
-    msg.data.push_back(val_windup);
+    msg.data.push_back(val_3_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==6)
-    msg.data.push_back(val_wind);
+    msg.data.push_back(val_4_wind);
   else if(servoNr==7)
-    msg.data.push_back(val_windup);
+    msg.data.push_back(val_4_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==8)
-    msg.data.push_back(val_wind);
+    msg.data.push_back(val_5_wind);
   else if(servoNr==9)
-    msg.data.push_back(val_windup);
+    msg.data.push_back(val_5_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==10)
-    msg.data.push_back(val_wind);
+    msg.data.push_back(val_6_wind);
   else if(servoNr==11)
-    msg.data.push_back(val_windup);
+    msg.data.push_back(val_6_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==12)
-    msg.data.push_back(val_wind);
+    msg.data.push_back(val_7_wind);
   else if(servoNr==13)
-    msg.data.push_back(val_windup);
+    msg.data.push_back(val_7_windup);
   else
     msg.data.push_back(4099);
 
   if(servoNr==14)
-    msg.data.push_back(val_wind);
+    msg.data.push_back(val_8_wind);
   else if(servoNr==15)
-    msg.data.push_back(val_windup);
+    msg.data.push_back(val_8_windup);
   else
     msg.data.push_back(4099);
 
@@ -220,14 +266,14 @@ void FloboticsFingerRvizServoController::stop(){
   //clear array
   msg.data.clear();
 
-  msg.data.push_back(val_windstop);
-  msg.data.push_back(val_windstop);
-  msg.data.push_back(val_windstop);
-  msg.data.push_back(val_windstop);
-  msg.data.push_back(val_windstop);
-  msg.data.push_back(val_windstop);
-  msg.data.push_back(val_windstop);
-  msg.data.push_back(val_windstop);
+  msg.data.push_back(val_1_windstop);
+  msg.data.push_back(val_2_windstop);
+  msg.data.push_back(val_3_windstop);
+  msg.data.push_back(val_4_windstop);
+  msg.data.push_back(val_5_windstop);
+  msg.data.push_back(val_6_windstop);
+  msg.data.push_back(val_7_windstop);
+  msg.data.push_back(val_8_windstop);
 
 /*
   flobotics_finger_messages::flobotics_finger_servo_control_values msg;
